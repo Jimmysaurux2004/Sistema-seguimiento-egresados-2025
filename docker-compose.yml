@@ -1,0 +1,48 @@
+services:
+  app:
+    build: .
+    container_name: graduate_system_app
+    ports:
+      - "8095:80"
+    volumes:
+      - .:/var/www/html
+      - ./docker/vhost.conf:/etc/apache2/sites-available/000-default.conf
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html/public
+    depends_on:
+      - db
+    networks:
+      - graduate_network
+
+  db:
+    image: mysql:8.0
+    container_name: graduate_system_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: graduate_system
+      MYSQL_USER: graduate_user
+      MYSQL_PASSWORD: graduate_pass
+    ports:
+      - "3308:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - graduate_network
+
+  adminer:
+    image: adminer
+    container_name: graduate_system_adminer
+    ports:
+      - "8096:8080"
+    depends_on:
+      - db
+    networks:
+      - graduate_network
+
+volumes:
+  mysql_data:
+
+networks:
+  graduate_network:
+    driver: bridge

@@ -1,0 +1,38 @@
+# Docker
+.env.local
+.env.production
+
+# PHP
+vendor/
+composer.lock
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+
+# Database backups
+*.sql.backup
+backup.sql
+
+# Node modules (if any accidentally added)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Build artifacts
+dist/
+build/
