@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Application entry point - Graduate Management System
  * Redirects to login if not authenticated, otherwise initializes routing
@@ -77,15 +78,15 @@ $router->get('/eventos/{id}', 'EventoController@show');
 $router->get('/admin/dashboard', 'HomeController@dashboard');
 $router->get('/admin/egresados', 'EgresadoController@list');
 $router->get('/admin/egresados/{dni}', 'EgresadoController@show');
-$router->get('/admin/egresados/create', 'EgresadoController@create');
-$router->post('/admin/egresados', 'EgresadoController@store');
 
 $router->get('/admin/eventos', 'EventoController@list');
 $router->get('/admin/eventos/create', 'EventoController@create');
 $router->post('/admin/eventos', 'EventoController@store');
+$router->get('/admin/eventos/{id}', 'EventoController@show');
 $router->get('/admin/eventos/edit/{id}', 'EventoController@edit');
 $router->post('/admin/eventos/update/{id}', 'EventoController@update');
 $router->post('/admin/eventos/toggle-status', 'EventoController@toggleStatus');
+$router->delete('/admin/eventos/{id}', 'EventoController@delete');
 
 $router->get('/admin/encuestas', 'EncuestaController@list');
 $router->get('/admin/encuestas/create', 'EncuestaController@create');
@@ -111,4 +112,3 @@ try {
         require VIEW_PATH . '/errors/500.php';
     }
 }
-?>
